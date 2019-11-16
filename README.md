@@ -1,4 +1,4 @@
-# MVVM-sample-architecture-
+# MVVM-sample-architecture
 MVVM sample with Kotlin - Retrofit - RxJava - Dagger - Stetho - Chuck
 
 The main purpose of this app is to show MVVM sample implementation using the new Google Architectural
