@@ -29,8 +29,15 @@ class ProjectListFragment : BaseFragment() {
                               savedInstanceState: Bundle?): View? {
         rootView = inflater.inflate(R.layout.fragment_project_list, container, false)
 
-        initList()
+        initializeViewModel()
+
         return rootView
+    }
+
+    private fun initializeViewModel() {
+        val viewModel = ViewModelProviders.of(this).get(ProjectListViewModel::class.java)
+
+        observeViewModel(viewModel)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -38,12 +45,6 @@ class ProjectListFragment : BaseFragment() {
         initList()
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        val viewModel = ViewModelProviders.of(this).get(ProjectListViewModel::class.java)
-
-        observeViewModel(viewModel)
-    }
 
     private fun observeViewModel(viewModel: ProjectListViewModel) {
         // Update the list when the data changes
@@ -51,6 +52,7 @@ class ProjectListFragment : BaseFragment() {
         viewModel.loading.observe(this, Observer<Boolean> {
             loading_projects?.visibility = if (it!!) View.VISIBLE else View.GONE
         })
+
         viewModel.projectListObservable.observe(this, object : Observer<List<Project>> {
             override fun onChanged(t: List<Project>?) {
                 projectAdapter?.setProjectList(t!!)
