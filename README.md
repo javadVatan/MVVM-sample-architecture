@@ -7,4 +7,4 @@ components LiveData and ViewModel.
 First implementation from https://github.com/hazems/mvvm-sample-app/tree/part1
 
 
- ![Architecture](images/google)
+ ![Architecture](images/google.png)
