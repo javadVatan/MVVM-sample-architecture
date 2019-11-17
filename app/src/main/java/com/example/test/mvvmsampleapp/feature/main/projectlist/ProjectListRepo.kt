@@ -1,17 +1,14 @@
 package com.example.test.mvvmsampleapp.feature.main.projectlist
 
 import android.arch.lifecycle.MutableLiveData
-import com.example.test.mvvmsampleapp.core.MyApplication
 import com.example.test.mvvmsampleapp.core.base.BaseApiModel
 import com.example.test.mvvmsampleapp.core.base.BaseObserver
+import com.example.test.mvvmsampleapp.core.base.BaseRepository
 import com.example.test.mvvmsampleapp.feature.main.projectlist.model.Project
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-class ProjectListRepo {
-    var loading: MutableLiveData<Boolean> = MutableLiveData()
-    private var mApiAll = MyApplication.getApiComponent().apiAll
-
+class ProjectListRepo : BaseRepository() {
 
     fun getProjectList(userId: String): MutableLiveData<List<Project>> {
         val data = MutableLiveData<List<Project>>()
