@@ -16,7 +16,7 @@ import com.p_gum.p_gum.core.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_project_list.*
 
 
-class ProjectListFragment : BaseFragment() {
+class ProjectListFragment : BaseFragment<ProjectListViewModel>() {
     private var projectAdapter: ProjectAdapter? = null
 
     private val projectClickCallback = ProjectClickCallback {
@@ -35,9 +35,9 @@ class ProjectListFragment : BaseFragment() {
     }
 
     private fun initializeViewModel() {
-        val viewModel = ViewModelProviders.of(this).get(ProjectListViewModel::class.java)
+       mViewModel = ViewModelProviders.of(this).get(ProjectListViewModel::class.java)
 
-        observeViewModel(viewModel)
+        observeViewModel(mViewModel)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -45,11 +45,10 @@ class ProjectListFragment : BaseFragment() {
         initList()
     }
 
-
     private fun observeViewModel(viewModel: ProjectListViewModel) {
         // Update the list when the data changes
 
-        viewModel.loading.observe(this, Observer<Boolean> {
+        viewModel.mLoading.observe(this, Observer<Boolean> {
             loading_projects?.visibility = if (it!!) View.VISIBLE else View.GONE
         })
 
@@ -60,7 +59,7 @@ class ProjectListFragment : BaseFragment() {
         })
     }
 
-    fun initList() {
+    private fun initList() {
         projectAdapter = ProjectAdapter(projectClickCallback)
 
         project_list?.apply {

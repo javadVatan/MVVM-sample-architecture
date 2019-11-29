@@ -9,9 +9,10 @@ import com.example.test.mvvmsampleapp.BuildConfig
 import com.example.test.mvvmsampleapp.core.MyApplication
 import com.example.test.mvvmsampleapp.core.multilanguage.LocaleManager
 
-abstract class BaseActivity : AppCompatActivity() {
+abstract class BaseActivity <T : BaseViewModel<*>>: AppCompatActivity() {
     protected var app = MyApplication.getInstance()
     protected lateinit var mContext: Context
+    protected lateinit var mViewModel:T
 
     override fun attachBaseContext(base: Context) {
         app.activityContext = this

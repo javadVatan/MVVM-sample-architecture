@@ -19,19 +19,12 @@ import okhttp3.ResponseBody;
 import retrofit2.HttpException;
 
 
-
-
 public abstract class BaseObserver<T> extends DisposableObserver<T> {
     public static final int CODE_EXCEPTION = 1/*-1*/;
     public static final int CODE_UPDATING = 10;
     public static final int CODE_SUCCESS = 0;
-    public static final int CODE_INVALID_TOKEN = 4/* 51*/;
     public static final int CODE_USER_IS_BAN = 5/* 51*/;
-
-    public static final int CODE_INVALID_VERSION_CODE = 3/*53*/;
     public static final int CODE_DEPRECATED_VERSION_CODE = 11/*9*//*54*/;
-
-    public static final int CODE_LOGIN_USER_NOT_LOGIN = 7/*103*/;
 
 
     Application mApp = MyApplication.getInstance();
@@ -87,7 +80,7 @@ public abstract class BaseObserver<T> extends DisposableObserver<T> {
         if (!mFunction.isNetworkAvailable())
             onFailure(Error.SERVER_NOT_NETWORK_AVAILABLE_ERROR);
         else {
-            boolean isToastDisabled= onFailure(Error.SERVER_UNEXPECTED_ERROR);
+            boolean isToastDisabled = onFailure(Error.SERVER_UNEXPECTED_ERROR);
             if (!isToastDisabled/* && mFunction.isActivityRunning(mApp.getActivityContext())*/) {
 
                 Toast.makeText(mApp, mApp.getString(R.string.error_unexpected), Toast.LENGTH_SHORT).show();
@@ -120,8 +113,9 @@ public abstract class BaseObserver<T> extends DisposableObserver<T> {
             case 500:
             case 502:
             case 503:
-                Toast.makeText(mApp, mApp.getString(R.string.error_internal_server_error), Toast.LENGTH_SHORT).show();
-                this.onFailure(Error.SERVER_UNEXPECTED_ERROR);
+                boolean isToastDisabled = this.onFailure(Error.SERVER_UNEXPECTED_ERROR);
+                if (!isToastDisabled)
+                    Toast.makeText(mApp, mApp.getString(R.string.error_internal_server_error), Toast.LENGTH_SHORT).show();
                 break;
         }
     }
@@ -133,11 +127,6 @@ public abstract class BaseObserver<T> extends DisposableObserver<T> {
 
     private void manageCustomCode(BaseApiModel baseData) {
         switch (baseData.getCode()) {
-            case BaseObserver.CODE_INVALID_VERSION_CODE:
-            case BaseObserver.CODE_LOGIN_USER_NOT_LOGIN:
-            case BaseObserver.CODE_INVALID_TOKEN:
-//                new Toast(Toast.TYPE_DANGER, Application.getInstance().getString(R.string.you_need_login_again)).show();
-                break;
 
             case BaseObserver.CODE_DEPRECATED_VERSION_CODE:
                 manageDeprecatedVersionCode(baseData);
@@ -173,35 +162,8 @@ public abstract class BaseObserver<T> extends DisposableObserver<T> {
     }
 
     private void manageDeprecatedVersionCode(BaseApiModel baseData) {
-   /*     String updateUrl;
-        if (baseData != null && baseData.getMessage().length() != 0) {
-            updateUrl = baseData.getMessage();
 
-            Setting.setUpdateData(NotificationFireBase.TYPE_UPDATE_FORCE, updateUrl);
-
-            // There was bug, sometimes the SecurePreferences is null (that means user status is not login)
-            // and it can the app crashed. I (Javad Vatan) added this condition for work properly.
-            if (SecurePreferences.getInstance() != null)
-                Application.getInstance().safeLogout();
-            else
-                Application.getInstance().clearDataAndLogout();
-
-            showUpdateNotification(updateUrl);
-        }*/
     }
-/*
-    private void showUpdateNotification(String url) {
-        String title = mApp.getApplicationContextt().getResources().getString(R.string.titlt_force_update);
-        String detail = mApp.getApplicationContextt().getString(R.string.detail_force_update);
-
-        Intent notificationIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-
-        new NotificationMaker.Builder(Constants.NOTIFICATION_ID_LOCAL_UPDATE,
-                Constants.NOTIFICATION_CHANEL_LOCAL_UPDATE, title)
-                .body(detail)
-                .contentIntent(notificationIntent)
-                .build();
-
-    }*/
 }
+
 

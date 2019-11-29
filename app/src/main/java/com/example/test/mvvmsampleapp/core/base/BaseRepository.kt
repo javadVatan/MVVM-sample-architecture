@@ -9,6 +9,6 @@ import com.example.test.mvvmsampleapp.core.remote.ApiInterface
  * Sites: http://Jvatan.ir && http://JavadVatan.ir
  */
 open class BaseRepository {
-    protected var loading: MutableLiveData<Boolean> = MutableLiveData()
+     var mLoading: MutableLiveData<Boolean> = MutableLiveData()
     protected var mApiAll: ApiInterface = MyApplication.getApiComponent().apiAll
 }

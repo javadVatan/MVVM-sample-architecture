@@ -7,15 +7,17 @@ import android.support.v4.app.Fragment
 import android.view.View
 import android.widget.Toast
 import com.example.test.mvvmsampleapp.core.MyApplication
+import com.example.test.mvvmsampleapp.core.base.BaseViewModel
 import com.example.test.mvvmsampleapp.core.multilanguage.LocaleManager
 
 
-abstract class BaseFragment : Fragment() {
+abstract class BaseFragment <T : BaseViewModel<*>> : Fragment() {
 
     protected var app = MyApplication.getInstance()
     protected var rootView: View? = null
     protected var mContext: Context? = null
     protected var mActivity: Activity? = null
+    protected lateinit var mViewModel:T
 
 
     init {

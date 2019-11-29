@@ -36,10 +36,10 @@ public class NetworkModule {
             Request original = chain.request();
             Request.Builder builder1 = original.newBuilder();
                           /*  .addHeader(Constants.HEADER_AUTHORIZATION, getToken())
-                            .addHeader(Constants.HEADER_LANGUAGE, Setting.getUserLocal())
-                            .addHeader(Constants.HEADER_PACKAGE_NAME, context.getPackageName())
-                            .addHeader(Constants.HEADER_TIME_ZONE, TimeZone.getDefault().getID())
-                            .addHeader(Constants.HEADER_VERSION_CODE, String.valueOf(BuildConfig.VERSION_CODE));*/
+                    .addHeader(Constants.HEADER_LANGUAGE, Setting.getUserLocal())
+                    .addHeader(Constants.HEADER_PACKAGE_NAME, context.getPackageName())
+                    .addHeader(Constants.HEADER_TIME_ZONE, TimeZone.getDefault().getID())
+                    .addHeader(Constants.HEADER_VERSION_CODE, String.valueOf(BuildConfig.VERSION_CODE));*/
             Request request = builder1.build();
 
             if (!GlobalFunction.Companion.getInstance().isNetworkAvailable()) {

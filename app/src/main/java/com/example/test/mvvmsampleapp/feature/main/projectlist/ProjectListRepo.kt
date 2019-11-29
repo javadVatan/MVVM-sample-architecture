@@ -12,22 +12,22 @@ class ProjectListRepo : BaseRepository() {
 
     fun getProjectList(userId: String): MutableLiveData<List<Project>> {
         val data = MutableLiveData<List<Project>>()
-        loading.value = true
+        mLoading.value = true
 
         mApiAll.getProjectList(userId).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object  : BaseObserver<List<Project>>(){
                     override fun onSuccess(t:List<Project>?) {
                         data.value = t
-                        loading.value = false
+                        mLoading.value = false
                     }
 
                     override fun onError(baseData: BaseApiModel<*>?) {
-                        loading.value = false
+                        mLoading.value = false
                     }
 
                     override fun onFailure(e: Error?): Boolean {
-                        loading.value = false
+                        mLoading.value = false
                         return  false
                     }
                 })

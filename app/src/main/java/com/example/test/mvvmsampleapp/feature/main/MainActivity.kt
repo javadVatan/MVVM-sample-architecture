@@ -4,11 +4,12 @@ import android.os.Bundle
 
 import com.example.test.mvvmsampleapp.R
 import com.example.test.mvvmsampleapp.core.base.BaseActivity
+import com.example.test.mvvmsampleapp.core.base.BaseViewModel
 
 
 import com.example.test.mvvmsampleapp.feature.main.projectlist.ProjectListFragment
 
-class MainActivity : BaseActivity() {
+class MainActivity : BaseActivity<BaseViewModel<*>>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
