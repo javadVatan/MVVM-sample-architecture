@@ -14,7 +14,7 @@ public class StaticPreferences extends FatherPreferences{
 
     private StaticPreferences() {
         mSharedPreferences = mContext.getSharedPreferences(
-                "com.p_gum.p_gum.core.static_preferences", Context.MODE_PRIVATE);
+                " com.example.test.mvvmsampleapp.core.static_preferences", Context.MODE_PRIVATE);
     }
 
     public static synchronized StaticPreferences getInstance() {

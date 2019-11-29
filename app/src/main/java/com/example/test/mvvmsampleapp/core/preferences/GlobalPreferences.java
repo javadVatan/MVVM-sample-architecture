@@ -1,7 +1,7 @@
 package com.example.test.mvvmsampleapp.core.preferences;
 
-import android.content.Context;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
 /**
  * Created by Javad Vatan on 2/28/2018.
@@ -11,19 +11,10 @@ public class GlobalPreferences extends FatherPreferences {
 
     private static GlobalPreferences myInstance;
     private SharedPreferences mSharedPreferences;
-    public static final String FACTORY_1_ALL_STEPS = "f1_all_steps";
-    public static final String FACTORY_2_ALL_STEPS = "f2_all_steps";
-    public static final String FACTORY_3_ALL_STEPS = "f3_all_steps";
-    public static final String FACTORY_4_ALL_STEPS = "f4_all_steps";
 
-    public static final String FACTORY_1_DEBUG_ALL_STEPS = "f1_debug_all_steps";
-    public static final String FACTORY_2_DEBUG_ALL_STEPS = "f2_debug_all_steps";
-    public static final String FACTORY_3_DEBUG_ALL_STEPS = "f3_debug_all_steps";
-    public static final String FACTORY_4_DEBUG_ALL_STEPS = "f4_debug_all_steps";
 
     private GlobalPreferences() {
-        mSharedPreferences = mContext.getSharedPreferences(
-                "com.p_gum.p_gum.core.public_preferences", Context.MODE_PRIVATE);
+        mSharedPreferences =  PreferenceManager.getDefaultSharedPreferences(mContext);
     }
 
     public static synchronized GlobalPreferences getInstance() {
